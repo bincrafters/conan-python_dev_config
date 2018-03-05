@@ -1,6 +1,8 @@
 linux: &linux
    os: linux
    sudo: required
+   services:
+     - docker
 
 osx: &osx
    os: osx
@@ -8,23 +10,16 @@ osx: &osx
 
 language: python
 
-addons:
-  apt:
-    packages:
-      - python-dev
-
 matrix:
    include:
       - <<: *linux
-        python: "2.7"
+        env: CONAN_DOCKER_IMAGE=python:2.7
       - <<: *linux
-        python: "3.3"
+        env: CONAN_DOCKER_IMAGE=python:3.4
       - <<: *linux
-        python: "3.4"
+        env: CONAN_DOCKER_IMAGE=python:3.5
       - <<: *linux
-        python: "3.5"
-      - <<: *linux
-        python: "3.6"
+        env: CONAN_DOCKER_IMAGE=python:3.6
       - <<: *osx
         osx_image: xcode9
 
