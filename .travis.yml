@@ -2,13 +2,6 @@ linux: &linux
    os: linux
    sudo: required
    language: python
-   python:
-    - "2.6"
-    - "2.7"
-    - "3.3"
-    - "3.4"
-    - "3.5"
-    - "3.6"
 osx: &osx
    os: osx
    language: generic
