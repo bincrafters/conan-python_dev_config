@@ -1,27 +1,26 @@
 linux: &linux
-   os: linux
-   sudo: required
-   services:
-     - docker
+  os: linux
+  sudo: required
+  language: python
+  services:
+    - docker
 
 osx: &osx
-   os: osx
-   language: generic
-
-language: python
+  os: osx
+  language: generic
 
 matrix:
-   include:
-      - <<: *linux
-        env: CONAN_DOCKER_IMAGE=python:2.7
-      - <<: *linux
-        env: CONAN_DOCKER_IMAGE=python:3.4
-      - <<: *linux
-        env: CONAN_DOCKER_IMAGE=python:3.5
-      - <<: *linux
-        env: CONAN_DOCKER_IMAGE=python:3.6
-      - <<: *osx
-        osx_image: xcode9
+  include:
+    - <<: *linux
+      env: CONAN_DOCKER_IMAGE=python:2.7
+    - <<: *linux
+      env: CONAN_DOCKER_IMAGE=python:3.4
+    - <<: *linux
+      env: CONAN_DOCKER_IMAGE=python:3.5
+    - <<: *linux
+      env: CONAN_DOCKER_IMAGE=python:3.6
+    - <<: *osx
+      osx_image: xcode9
 
 install:
   - chmod +x .travis/install.sh
