@@ -1,24 +1,23 @@
 linux: &linux
   os: linux
   sudo: required
-  language: python
-  services:
-    - docker
+  language: cpp
 
 osx: &osx
   os: osx
-  language: generic
+  language: cpp
+
+addons:
+  apt:
+    packages:
+    - python3-dev
 
 matrix:
   include:
     - <<: *linux
-      env: CONAN_DOCKER_IMAGE=python:2.7
+      env: CONAN_OPTIONS=python_dev_config:python=python
     - <<: *linux
-      env: CONAN_DOCKER_IMAGE=python:3.4
-    - <<: *linux
-      env: CONAN_DOCKER_IMAGE=python:3.5
-    - <<: *linux
-      env: CONAN_DOCKER_IMAGE=python:3.6
+      env: CONAN_OPTIONS=python_dev_config:python=python3
     - <<: *osx
       osx_image: xcode9
 
