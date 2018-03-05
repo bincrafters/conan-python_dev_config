@@ -1,14 +1,21 @@
 linux: &linux
    os: linux
    sudo: required
-   language: python
+
 osx: &osx
    os: osx
    language: generic
+
+language: C++
+
+addons:
+  apt:
+    packages:
+      - python-dev
+      - python-dev:i386
+
 matrix:
    include:
-      - <<: *linux
-        python: "2.6"
       - <<: *linux
         python: "2.7"
       - <<: *linux
