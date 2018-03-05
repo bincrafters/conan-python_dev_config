@@ -12,7 +12,6 @@ addons:
   apt:
     packages:
       - python-dev
-      - python-dev:i386
 
 matrix:
    include:
