@@ -20,7 +20,7 @@ if [[ "$(uname -s)" == 'Darwin' ]]; then
 
     pip install conan --upgrade
     pip install conan_package_tools bincrafters_package_tools
-elif [[ "$(TRAVIS)" == "true" ]]; then
+elif [[ "$TRAVIS" != "" ]]; then
     sudo pip install conan --upgrade
     sudo pip install conan_package_tools bincrafters_package_tools
 fi
