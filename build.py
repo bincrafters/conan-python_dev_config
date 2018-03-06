@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from bincrafters import build_template_header_only
-
+import os
 
 if __name__ == "__main__":
     builder = build_template_header_only.get_builder()
