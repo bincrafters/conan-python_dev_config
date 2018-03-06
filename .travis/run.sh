@@ -10,4 +10,8 @@ if [[ "$(uname -s)" == 'Darwin' ]]; then
     pyenv activate conan
 fi
 
+echo '================================================================================'
+$PYEXEC -c 'import pprint; import sysconfig; pprint.pprint([sysconfig.get_config_vars(),sysconfig.get_paths()]);'
+echo '================================================================================'
+
 python build.py

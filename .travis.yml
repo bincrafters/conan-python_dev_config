@@ -1,13 +1,12 @@
 linux: &linux
   os: linux
   sudo: required
-  language: cpp
+  language: python
 
 osx: &osx
   os: osx
-  language: cpp
+  language: generic
   osx_image: xcode9
-  env: CONAN_APPLE_CLANG_VERSIONS=9.0
 
 addons:
   apt:
@@ -18,10 +17,11 @@ addons:
 matrix:
   include:
     - <<: *linux
-      env: CONAN_OPTIONS=python_dev_config:python=python
+      env: PYEXEC=python CONAN_OPTIONS=python_dev_config:python=python
     - <<: *linux
-      env: CONAN_OPTIONS=python_dev_config:python=python3
+      env: PYEXEC=python3 CONAN_OPTIONS=python_dev_config:python=python3
     - <<: *osx
+      env: PYEXEC=python CONAN_OPTIONS=python_dev_config:python=python
 
 install:
   - chmod +x .travis/install.sh
