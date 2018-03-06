@@ -11,7 +11,7 @@ if [[ "$(uname -s)" == 'Darwin' ]]; then
 fi
 
 echo '================================================================================'
-$PYEXEC -c 'import pprint; import sysconfig; pprint.pprint([sysconfig.get_config_vars(),sysconfig.get_paths()]);'
+python -c 'import pprint; import sysconfig; pprint.pprint([sysconfig.get_config_vars(),sysconfig.get_paths()]);'
 echo '================================================================================'
 
 python build.py
