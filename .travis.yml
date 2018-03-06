@@ -17,8 +17,10 @@ addons:
 matrix:
   include:
     - <<: *linux
+      python: 2.7
       env: PYEXEC=python CONAN_OPTIONS=python_dev_config:python=python
     - <<: *linux
+      python: 3.6
       env: PYEXEC=python3 CONAN_OPTIONS=python_dev_config:python=python3
     - <<: *osx
       env: PYEXEC=python CONAN_OPTIONS=python_dev_config:python=python
