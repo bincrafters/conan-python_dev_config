@@ -6,6 +6,6 @@ import os
 
 if __name__ == "__main__":
     builder = build_template_header_only.get_builder()
-    options = dict(map(lambda o: o.split('='), os.environ['CONAN_OPTIONS'].split(';')))
+    options = dict(map(lambda o: o.split('='), os.getenv('CONAN_OPTIONS',"").split(';')))
     builder.add(options=options)
     builder.run()

@@ -23,7 +23,7 @@ matrix:
 
 install:
   - chmod +x .travis/install.sh
-  - ./.travis/install.sh
+  - sudo ./.travis/install.sh
 
 script:
   - chmod +x .travis/run.sh
