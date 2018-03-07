@@ -21,7 +21,9 @@ matrix:
     - <<: *linux
       python: 3.6
     - <<: *osx
-      env: PYTHON_VERSION=2.7.10 CONAN_OPTIONS=python_dev_config:python=python
+      env: PYTHON_VERSION=2.7.14
+    - <<: *osx
+      env: PYTHON_VERSION=3.6.4
 
 install:
   - chmod +x .travis/install.sh
