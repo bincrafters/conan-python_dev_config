@@ -23,7 +23,7 @@ matrix:
     - <<: *osx
       env: PYTHON_VERSION=2.7.14
     - <<: *osx
-      env: PYTHON_VERSION=3.6.4
+      env: PYTHON_VERSION=3.5.5
 
 install:
   - chmod +x .travis/install.sh
