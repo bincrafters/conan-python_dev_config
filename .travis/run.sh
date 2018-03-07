@@ -8,6 +8,7 @@ if [[ "$(uname -s)" == 'Darwin' ]]; then
         eval "$(pyenv init -)"
     fi
     pyenv activate conan
+    find $HOME/.pyenv/versions -name "*.dylib"
 fi
 
 echo '================================================================================'
