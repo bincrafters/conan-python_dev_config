@@ -12,8 +12,7 @@ if [[ "$(uname -s)" == 'Darwin' ]]; then
     find $HOME/.pyenv/versions -name "*.*lib"
 fi
 
-echo '================================================================================'
-python -c 'import pprint; import sysconfig; pprint.pprint([sysconfig.get_config_vars(),sysconfig.get_paths()]);'
-echo '================================================================================'
+python -c 'import pprint; import sysconfig; pprint.pprint(sysconfig.get_config_vars());'
+python -c 'import pprint; import sysconfig; pprint.pprint(sysconfig.get_paths());'
 
 python build.py

@@ -74,10 +74,12 @@ class PythonDevConfigConan(ConanFile):
     @property
     def python_lib(self):
         if not hasattr(self, '_py_lib'):
-            self._py_lib = self.get_python_path("stdlib")
-            if self._py_lib:
-                if self.settings.os == "Windows":
+            if self.settings.os == "Windows":
+                self._py_lib = self.get_python_path("stdlib")
+                if self._py_lib:
                     self._py_lib = os.path.join(os.path.dirname(self._py_lib), "libs", "python" + self.python_version_nodot + ".lib")
+            else:
+                self._py_lib = os.path.join(self.get_python_var('LIBDIR'), self.get_python_var('LDLIBRARY'))
         return self._py_lib
 
     @property
