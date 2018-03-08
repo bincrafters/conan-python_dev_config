@@ -79,7 +79,7 @@ class PythonDevConfigConan(ConanFile):
                 if self._py_lib:
                     self._py_lib = os.path.join(os.path.dirname(self._py_lib), "libs", "python" + self.python_version_nodot + ".lib")
             else:
-                self._py_lib = os.path.join(self.get_python_var('LIBDIR'), self.get_python_var('LDLIBRARY'))
+                self._py_lib = os.path.join(self.get_python_var('LIBDIR'), self.get_python_var('LIBRARY'))
         return self._py_lib
 
     @property
