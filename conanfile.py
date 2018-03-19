@@ -9,7 +9,7 @@ import os
 # pylint: disable=W0201
 class PythonDevConfigConan(ConanFile):
     name = "python_dev_config"
-    version = "0.1"
+    version = "0.2"
     license = "MIT"
     export = ["LICENSE.md"]
     description = "Configuration of Python interpreter for use as a development dependency."
@@ -28,6 +28,7 @@ class PythonDevConfigConan(ConanFile):
             self.cpp_info.includedirs = [self.python_include]
             self.cpp_info.libdirs = [os.path.dirname(self.python_lib)]
             self.cpp_info.libs = [os.path.basename(self.python_lib)]
+            self.cpp_info.bindirs = [os.path.dirname(self.python_lib), os.path.dirname(self.python_exec)]
             self.user_info.python_version = self.python_version
             self.user_info.python_exec = self.python_exec
             self.user_info.python_include_dir = self.python_include
@@ -75,7 +76,7 @@ class PythonDevConfigConan(ConanFile):
     @property
     def python_lib(self):
         if not hasattr(self, '_py_lib'):
-            if self.settings.os == "Windows":
+            if self.settings.os == "Windows" and not self.settings.os.subsystem:
                 self._py_lib = self.get_python_path("stdlib")
                 if self._py_lib:
                     self._py_lib = os.path.join(os.path.dirname(self._py_lib), "libs", "python" + self.python_version_nodot + ".lib")
