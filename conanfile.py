@@ -2,14 +2,17 @@
 # -*- coding: utf-8 -*-
 
 from conans import ConanFile
-from io import StringIO
+try:
+    from cStringIO import StringIO
+except ImportError:
+    from io import StringIO
 import os
 
 
 # pylint: disable=W0201
 class PythonDevConfigConan(ConanFile):
     name = "python_dev_config"
-    version = "0.2"
+    version = "0.3"
     license = "MIT"
     export = ["LICENSE.md"]
     description = "Configuration of Python interpreter for use as a development dependency."
