@@ -12,7 +12,7 @@ import os
 # pylint: disable=W0201
 class PythonDevConfigConan(ConanFile):
     name = "python_dev_config"
-    version = "0.3"
+    version = "0.4"
     license = "MIT"
     export = ["LICENSE.md"]
     description = "Configuration of Python interpreter for use as a development dependency."
@@ -21,6 +21,7 @@ class PythonDevConfigConan(ConanFile):
     options = { "python": "ANY" }
     default_options = "python=python"
     settings = "os", "arch"
+    build_policy = "missing"
 
     def package_id(self):
         self.info.header_only()
