@@ -37,7 +37,8 @@ class PythonDevConfigConan(ConanFile):
             self.user_info.python_exec = self.python_exec
             self.user_info.python_include_dir = self.python_include
             self.user_info.python_lib_dir = os.path.dirname(self.python_lib)
-            self.env_info.path = [os.path.dirname(self.python_lib), os.path.dirname(self.python_exec)]
+            self.env_info.path.append(os.path.dirname(self.python_lib))
+            self.env_info.path.append(os.path.dirname(self.python_exec))
 
     @property
     def have_python_dev(self):
