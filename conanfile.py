@@ -119,7 +119,7 @@ class PythonDevConfigConan(ConanFile):
         pyexec = self.python_exec
         if pyexec:
             output = StringIO()
-            self.run('{0} -c "{1}"'.format(pyexec, cmd), output=output)
+            self.run('"{0}" -c "{1}"'.format(pyexec, cmd), output=output)
             result = output.getvalue().strip()
         else:
             result = ""
