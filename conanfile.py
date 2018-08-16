@@ -61,7 +61,7 @@ class PythonDevConfigConan(ConanFile):
                 self.run('{0} -c "import sys; print(sys.executable)"'.format(pyexec), output=output)
                 self._py_exec = output.getvalue().strip()
             except:
-                self._py_exec = None
+                raise Exception("Error running python at path provided: %s" % str(self.options.python))
         return self._py_exec
 
     @property
@@ -101,10 +101,12 @@ class PythonDevConfigConan(ConanFile):
     def python_include(self):
         if not hasattr(self, '_py_include'):
             self._py_include = None
+            self.output.warn("trying to figure out py_include")
             for py_include in [self.get_python_path("include"), self.get_python_var('INCLUDEPY')]:
                 if not self._py_include and py_include:
                     if os.path.exists(os.path.join(py_include, 'pyconfig.h')):
                         self._py_include = py_include
+            self.output.warn("done figuring out py_include, returning : " + self._py_include)
         return self._py_include
 
     def get_python_var(self, var_name):
@@ -119,6 +121,7 @@ class PythonDevConfigConan(ConanFile):
         pyexec = self.python_exec
         if pyexec:
             output = StringIO()
+            self.output.warn('running command: "{0}" -c "{1}"'.format(pyexec, cmd))
             self.run('"{0}" -c "{1}"'.format(pyexec, cmd), output=output)
             result = output.getvalue().strip()
         else:
