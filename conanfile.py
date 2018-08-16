@@ -28,7 +28,6 @@ class PythonDevConfigConan(ConanFile):
         self.info.options.python_version = self.python_version
 
     def package_info(self):
-        self.output.warn("running with python option: " + str(self.options.python))
         if self.have_python_dev:
             self.cpp_info.includedirs = [self.python_include]
             self.cpp_info.libdirs = [os.path.dirname(self.python_lib)]
@@ -102,12 +101,10 @@ class PythonDevConfigConan(ConanFile):
     def python_include(self):
         if not hasattr(self, '_py_include'):
             self._py_include = None
-            self.output.warn("trying to figure out py_include")
             for py_include in [self.get_python_path("include"), self.get_python_var('INCLUDEPY')]:
                 if not self._py_include and py_include:
                     if os.path.exists(os.path.join(py_include, 'pyconfig.h')):
                         self._py_include = py_include
-            self.output.warn("done figuring out py_include, returning : " + self._py_include)
         return self._py_include
 
     def get_python_var(self, var_name):
@@ -122,7 +119,7 @@ class PythonDevConfigConan(ConanFile):
         pyexec = self.python_exec
         if pyexec:
             output = StringIO()
-            self.output.warn('running command: "{0}" -c "{1}"'.format(pyexec, cmd))
+            self.output.info('running command: "{0}" -c "{1}"'.format(pyexec, cmd))
             self.run('"{0}" -c "{1}"'.format(pyexec, cmd), output=output)
             result = output.getvalue().strip()
         else:
