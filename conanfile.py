@@ -28,6 +28,7 @@ class PythonDevConfigConan(ConanFile):
         self.info.options.python_version = self.python_version
 
     def package_info(self):
+        self.output.warn("running with python option: " + str(self.options.python))
         if self.have_python_dev:
             self.cpp_info.includedirs = [self.python_include]
             self.cpp_info.libdirs = [os.path.dirname(self.python_lib)]
