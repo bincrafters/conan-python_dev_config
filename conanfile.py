@@ -32,7 +32,7 @@ class PythonDevConfigConan(ConanFile):
         if self.have_python_dev:
             self.cpp_info.includedirs = [self.python_include]
             self.cpp_info.libdirs = [os.path.dirname(self.python_lib)]
-            self.cpp_info.libs = [os.path.basename(self.python_lib)]
+            self.cpp_info.libs = [self.python_lib_ldname]
             self.cpp_info.bindirs = [os.path.dirname(self.python_lib), os.path.dirname(self.python_exec)]
             self.user_info.python_version = self.python_version
             self.user_info.python_exec = self.python_exec
@@ -86,13 +86,20 @@ class PythonDevConfigConan(ConanFile):
                 self._py_lib = self.get_python_path("stdlib")
                 if self._py_lib:
                     self._py_lib = os.path.join(os.path.dirname(self._py_lib), "libs", "python" + self.python_version_nodot + ".lib")
+            elif self.settings.os == "Macos":
+                self._py_lib = os.path.join(self.get_python_var('LIBDIR'), self.get_python_var('LIBRARY'))
             else:
-                if self.settings.os == "Macos":
-                    self._py_lib = os.path.join(self.get_python_var('LIBDIR'), self.get_python_var('LIBRARY'))
-                else:
-                    self._py_lib = os.path.join(self.get_python_var('LIBDIR'), self.get_python_var('LDLIBRARY'))
-                self._py_lib = re.sub(r'lib', '', os.path.splitext(self._py_lib)[0])
+                self._py_lib = os.path.join(self.get_python_var('LIBDIR'), self.get_python_var('LDLIBRARY'))
         return self._py_lib
+    
+    @property
+    def python_lib_ldname(self):
+        if not hasattr(self, '_py_lib_ldname'):
+            if self.settings.os == "Windows" and not self.settings.os.subsystem:
+                self._py_lib_ldname = os.path.basename(self.python_lib)
+            else:
+                self._py_lib_ldname = re.sub(r'lib', '', os.path.splitext(os.path.basename(self.python_lib))[0])
+        return self._py_lib_ldname
 
     @property
     def python_bindir(self):
