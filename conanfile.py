@@ -7,12 +7,13 @@ try:
 except ImportError:
     from io import StringIO
 import os
+import re
 
 
 # pylint: disable=W0201
 class PythonDevConfigConan(ConanFile):
     name = "python_dev_config"
-    version = "0.4"
+    version = "0.5"
     license = "MIT"
     export = ["LICENSE.md"]
     description = "Configuration of Python interpreter for use as a development dependency."
@@ -85,10 +86,12 @@ class PythonDevConfigConan(ConanFile):
                 self._py_lib = self.get_python_path("stdlib")
                 if self._py_lib:
                     self._py_lib = os.path.join(os.path.dirname(self._py_lib), "libs", "python" + self.python_version_nodot + ".lib")
-            elif self.settings.os == "Macos":
-                self._py_lib = os.path.join(self.get_python_var('LIBDIR'), self.get_python_var('LIBRARY'))
             else:
-                self._py_lib = os.path.join(self.get_python_var('LIBDIR'), self.get_python_var('LDLIBRARY'))
+                if self.settings.os == "Macos":
+                    self._py_lib = os.path.join(self.get_python_var('LIBDIR'), self.get_python_var('LIBRARY'))
+                else:
+                    self._py_lib = os.path.join(self.get_python_var('LIBDIR'), self.get_python_var('LDLIBRARY'))
+                self._py_lib = re.sub(r'lib', '', os.path.splitext(self._py_lib)[0])
         return self._py_lib
 
     @property
