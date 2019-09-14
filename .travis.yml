@@ -1,6 +1,6 @@
 linux: &linux
   os: linux
-  sudo: required
+  dist: xenial
   language: python
 
 osx: &osx
@@ -26,9 +26,9 @@ matrix:
       env: PYTHON_VERSION=3.6.4
 
 install:
-  - chmod +x .travis/install.sh
-  - ./.travis/install.sh
+  - chmod +x .ci/install.sh
+  - ./.ci/install.sh
 
 script:
-  - chmod +x .travis/run.sh
-  - ./.travis/run.sh
+  - chmod +x .ci/run.sh
+  - ./.ci/run.sh

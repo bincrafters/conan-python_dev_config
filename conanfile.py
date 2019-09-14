@@ -20,7 +20,7 @@ class PythonDevConfigConan(ConanFile):
     url = "https://github.com/bincrafters/conan-python_dev_config"
     author = "Bincrafters <bincrafters@gmail.com>"
     options = {"python": "ANY"}
-    default_options = "python=python"
+    default_options = {'python': 'python'}
     settings = "os", "arch", "compiler"
     build_policy = "missing"
 
