@@ -1,6 +1,6 @@
 linux: &linux
   os: linux
-  dist: xenial
+  dist: bionic
   language: python
 
 osx: &osx
