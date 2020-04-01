@@ -5,10 +5,6 @@ environment:
   CONAN_VISUAL_VERSIONS: 15
 
   matrix:
-    - CONAN_PYTHON_PATH: C:/Python27/python.exe
-      CONAN_ARCHS: x86
-    - CONAN_PYTHON_PATH: C:/Python36/python.exe
-      CONAN_ARCHS: x86
     - CONAN_PYTHON_PATH: C:/Python27-x64/python.exe
       CONAN_ARCHS: x86_64
     - CONAN_PYTHON_PATH: C:/Python36-x64/python.exe
