@@ -1,5 +1,5 @@
 from conans import ConanFile
-from conans.errors import ConanException
+from conan.errors import ConanException
 try:
     from cStringIO import StringIO
 except ImportError:
